@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen&display=swap" rel="stylesheet">
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <!-- Jquery  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Handlebars -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"></script>
+    <!-- Moment -->
+    <script src="https://momentjs.com/downloads/moment.js"></script>
+    <!-- My Style -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>Calendar</title>
+  </head>
+  <body>
+
+    <div class="calendar_container">
+      <h2 id="month_displayed"></h2>
+
+    </div>
+
+  <!-- CALENDAR TEMPLATE -->
+  <script id="calendar_template" type="text/x-handlebars-template">
+  <div class="month">
+    <ul>
+      <li>
+        <span>{{dayNumber}}</span>
+        <span>{{DayOfWeek}}</span>
+      </li>
+    </ul>
+  </div>
+</script>
+
+
+
+
+
+
+    <script type="text/javascript" src="js/script.js"></script>
+  </body>
+</html>

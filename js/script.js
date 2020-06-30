@@ -1,12 +1,19 @@
 $(document).ready(function(){
 
  // Imposto la variabile della data iniziale del calendario (1 gennaio 2018)
-  var initialDate = moment("2018-01-01");
+  var initialDate = moment({
+  day: 1,
+  month: 0,
+  year: 2018
+  });
 
   displayMonth(initialDate);
 
   addHolidays(initialDate);
 
+  // var ciao = initialDate.month(0);
+  //
+  // console.log(ciao);
 
 
 
@@ -17,14 +24,14 @@ $(document).ready(function(){
 
   // Funzione per stampare i giorni del mese
   function displayMonth(initialDate){
-
-    // Recupro il mese corrente
-    var month = moment(initialDate).month();
+    //
+    // // Recupro il mese corrente
+    // var month = moment(initialDate).month();
 
     // Calcolo quanto giorni ci sono nel mese
-    var daysMonth = moment(month).daysInMonth();
+    var daysMonth = initialDate.daysInMonth();
 
-    var year = moment(initialDate).year();
+    // var year = moment(initialDate).year();
 
     // console.log(year);
 
@@ -33,8 +40,8 @@ $(document).ready(function(){
     var monthInHtml = moment(initialDate).format("MMMM");
 
     // Lo visualizzo nell'html
-    $('#month_displayed').html(monthInHtml + ' ' + year);
-    $('#month_displayed').attr('current_month', initialDate.format('YYYY-MM-DD'));
+    $('#month_displayed').text(initialDate.format('MMMM YYYY'))
+    // $('#month_displayed').attr('current_month', initialDate.format('YYYY-MM-DD'));
 
     // console.log(monthInHtml);
 
@@ -46,24 +53,24 @@ $(document).ready(function(){
     // inizializzo un ciclo FOR per creare il caledario dinamicamente
     for (var i = 1; i <= daysMonth; i++) {
       // Setto il formato dei giorni della settimana
-      days = moment(initialDate).format("dddd");
+      // days = moment(initialDate).format("dddd");
       // Creo l'oggetto contenente il numero del giorno corrente e il giorno della settimana
       var singleDay = moment({
-        dayNumber: i,
-        DayOfWeek: days,
-        month: month,
-        year: year
+        day: i,
+        // DayOfWeek: days,
+        month: initialDate.month(),
+        year: initialDate.year()
       });
 
       var context = {
-        date: days + ' ' + i + ' ' + moment(month).format('MMMM'),
+        date: singleDay.format('D MMMM'),
       };
 
       console.log(context);
       // Aggiungo un giorno ad ogni giro fino all'ultimo giorno del mese
-      var initialDateInFor = initialDate;
-
-      initialDateInFor.add(1,'days');
+      // var initialDateInFor = initialDate;
+      //
+      // initialDateInFor.add(1,'days');
 
       // console.log(context);
 
@@ -79,15 +86,19 @@ $(document).ready(function(){
 
   // Funzione per aggiungere le festività
   function addHolidays(initialDate){
+    // console.log(initialDate.year());
+    // console.log(initialDate.month());
     // Faccio la chiamata alla corrispondente API di Boolean per ottenere le festività
     $.ajax(
       {
         url:'https://flynn.boolean.careers/exercises/api/holidays',
         method: 'GET',
         data: {
-          year: moment(initialDate).year(),
-          month: moment(initialDate).month(),
+          year: initialDate.year(),
+          month: initialDate.month(),
         },
+
+
         // SE LA CHIAMATA HA SUCCESSO:
         success: function(request){
           var holidays = request.response;
@@ -100,6 +111,7 @@ $(document).ready(function(){
           for (var j = 0; j < holidays.length; j++) {
             var thisHoliday = holidays[j];
 
+
             var thisDay = $('.day[data_current_day="'+ thisHoliday.date +'"]');
 
             console.log(thisDay);
@@ -109,7 +121,41 @@ $(document).ready(function(){
             thisDay.append('-' + thisHoliday.name);
 
 
+
+            // $('.day').each(function(){
+            //
+            //
+            //   var thisDay = $(this);
+            //   var thisDayDate = thisDay.attr('data_current_day');
+            //
+            //
+            //   console.log(thisDay);
+            //
+            //   if (thisDay === holidays.date) {
+            //     console.log('sono nella if');
+            //     $(thisDay).addClass('holiday');
+            //     $(thisDay).append(' - ' + holidays.name);
+            //
+            //   }
+
+
+
+          
+
+
+
+            // var thisDay = $('.day[data_current_day="'+ thisHoliday.date +'"]');
+            //
+            // console.log(thisDay);
+            //
+            // thisDay.addClass('holiday');
+            //
+            // thisDay.append('-' + thisHoliday.name);
+            //
+
           }
+
+
 
 
         },

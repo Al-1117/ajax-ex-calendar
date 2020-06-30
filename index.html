@@ -21,21 +21,20 @@
   <body>
 
     <div class="calendar_container">
-      <h2 id="month_displayed"></h2>
+      <h2 current_month id="month_displayed"></h2>
+      <ul class="list">
+
+      </ul>
+
 
     </div>
 
   <!-- CALENDAR TEMPLATE -->
   <script id="calendar_template" type="text/x-handlebars-template">
   <div class="month">
-    <ul>
-      <li>
-        <span>{{dayNumber}}</span>
-        <span>{{DayOfWeek}}</span>
-        <span>{{holiday}}</span>
-
+      <li data_current_day="{{ day_attr }}" class="day">
+        {{date}}
       </li>
-    </ul>
   </div>
 </script>
 

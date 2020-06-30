@@ -60,10 +60,12 @@ $(document).ready(function(){
         // DayOfWeek: days,
         month: initialDate.month(),
         year: initialDate.year()
+
       });
 
       var context = {
         date: singleDay.format('D MMMM'),
+        day_attr: singleDay.format('YYYY-MM-DD'),
       };
 
       console.log(context);
@@ -140,7 +142,7 @@ $(document).ready(function(){
 
 
 
-          
+
 
 
 

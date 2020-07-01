@@ -11,6 +11,41 @@ $(document).ready(function(){
 
   addHolidays(initialDate);
 
+  // displayNextMonth();
+
+  $(document).on('click', '.arrow_right',
+    function(){
+      displayNextMonth();
+
+
+
+    }
+  );
+
+
+  //
+  if (event.wich == 39  || event.keyCode == 39) {
+    displayNextMonth();
+
+  };
+
+  if (event.wich == 37  || event.keyCode == 37) {
+    displayNextMonth();
+
+  };
+
+  $(document).on('click', '.arrow_left',
+    function(){
+      displayPreviousMonth();
+
+    }
+  );
+
+
+
+
+
+
   // var ciao = initialDate.month(0);
   //
   // console.log(ciao);
@@ -22,12 +57,42 @@ $(document).ready(function(){
 
   // FUNZIONI
 
+
+  // Funzione per visualizzare il prossimo mese
+  // function displayNextMonth(){
+  //
+  // }
+
+  function displayNextMonth(){
+
+    var thisMonth = $('#month_displayed').attr('current_month');
+    var momentthisMonth = moment(thisMonth);
+    momentthisMonth.add(1, 'months');
+
+    displayMonth(momentthisMonth);
+    addHolidays(momentthisMonth);
+
+    console.log(momentthisMonth);
+  }
+
+  function displayPreviousMonth(){
+
+    var thisMonth = $('#month_displayed').attr('current_month');
+    var momentthisMonth = moment(thisMonth);
+    momentthisMonth.subtract(1, 'months');
+
+    displayMonth(momentthisMonth);
+    addHolidays(momentthisMonth);
+
+    console.log(momentthisMonth);
+  }
+
   // Funzione per stampare i giorni del mese
   function displayMonth(initialDate){
     //
     // // Recupro il mese corrente
     // var month = moment(initialDate).month();
-
+    $('.list').html('');
     // Calcolo quanto giorni ci sono nel mese
     var daysMonth = initialDate.daysInMonth();
 
@@ -40,10 +105,8 @@ $(document).ready(function(){
     var monthInHtml = moment(initialDate).format("MMMM");
 
     // Lo visualizzo nell'html
-    $('#month_displayed').text(initialDate.format('MMMM YYYY'))
-    // $('#month_displayed').attr('current_month', initialDate.format('YYYY-MM-DD'));
-
-    // console.log(monthInHtml);
+    $('#month_displayed').text(initialDate.format('MMMM YYYY'));
+    $('#month_displayed').attr('current_month', initialDate.format('YYYY-MM-DD'));
 
     // TEMPLATE handlebars
 
@@ -68,7 +131,7 @@ $(document).ready(function(){
         day_attr: singleDay.format('YYYY-MM-DD'),
       };
 
-      console.log(context);
+      // console.log(context);
       // Aggiungo un giorno ad ogni giro fino all'ultimo giorno del mese
       // var initialDateInFor = initialDate;
       //
@@ -105,7 +168,7 @@ $(document).ready(function(){
         success: function(request){
           var holidays = request.response;
 
-          console.log(holidays);
+          // console.log(holidays);
 
           // Aggiungo le classi create agli elementi per evidenziare ogni festività
           // utilizzando un ciclo for
@@ -116,7 +179,7 @@ $(document).ready(function(){
 
             var thisDay = $('.day[data_current_day="'+ thisHoliday.date +'"]');
 
-            console.log(thisDay);
+            // console.log(thisDay);
 
             thisDay.addClass('holiday');
 

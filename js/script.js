@@ -23,16 +23,16 @@ $(document).ready(function(){
   );
 
 
+  // //
+  // if (event.wich == 39  || event.keyCode == 39) {
+  //   displayNextMonth();
   //
-  if (event.wich == 39  || event.keyCode == 39) {
-    displayNextMonth();
-
-  };
-
-  if (event.wich == 37  || event.keyCode == 37) {
-    displayNextMonth();
-
-  };
+  // };
+  //
+  // if (event.wich == 37  || event.keyCode == 37) {
+  //   displayNextMonth();
+  //
+  // };
 
   $(document).on('click', '.arrow_left',
     function(){

@@ -24,11 +24,19 @@ $(document).ready(function(){
 
 
   // //
-  // if (event.wich == 39  || event.keyCode == 39) {
-  //   displayNextMonth();
-  //
-  // };
-  //
+  $(document).keyup(
+    function(){
+      if (event.wich == 39  || event.keyCode == 39) {
+      displayNextMonth();
+      }
+
+      else if (event.wich == 37  || event.keyCode == 37) {
+        displayPreviousMonth();
+      }
+    }
+  );
+
+
   // if (event.wich == 37  || event.keyCode == 37) {
   //   displayNextMonth();
   //
